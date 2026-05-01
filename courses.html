@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Courses UI</title>
+<script>
+    
+  const searchInput = document.querySelector('.search');
+  const cards = document.querySelectorAll('.card');
+
+  searchInput.addEventListener('input', function () {
+    const searchText = searchInput.value.toLowerCase();
+
+    cards.forEach(card => {
+      const title = card.querySelector('h4').textContent.toLowerCase();
+      card.style.display = title.includes(searchText) ? 'block' : 'none';
+    });
+  });
+  function viewCourse(button) {
+    // جيب الكارد الأب بتاع الزرار
+    const card = button.closest('.card');
+
+    // جيب البيانات من الكارد
+    const title  = card.querySelector('h4').textContent;
+    const author = card.querySelector('p').textContent;
+    const imgSrc = card.querySelector('img').src;
+
+    // احفظهم في sessionStorage عشان تنقلهم للصفحة الجديدة
+    sessionStorage.setItem('courseTitle',  title);
+    sessionStorage.setItem('courseAuthor', author);
+    sessionStorage.setItem('courseImg',    imgSrc);
+
+    // افتح صفحة الكورس
+    window.location.href = 'course-details.html';
+  }
+
+  
+  // هات كل الكورسات
+
+// هات كل checkbox
+const checkboxes = document.querySelectorAll(".sidebar input[type='checkbox']");
+
+// لما أي checkbox يتغير
+checkboxes.forEach(cb => {
+    cb.addEventListener("change", filterCourses);
+});
+
+function filterCourses() {
+
+    // هات ال levels المختارة
+    let selectedLevels = [];
+
+    checkboxes.forEach(cb => {
+        if (cb.checked) {
+            selectedLevels.push(cb.value);
+        }
+    });
+
+    // لو مفيش حاجة متعلمة → يظهر كله
+    if (selectedLevels.length === 0) {
+        cards.forEach(card => card.style.display = "block");
+        return;
+    }
+
+    // فلترة
+    cards.forEach(card => {
+        const level = card.getAttribute("data-level");
+
+        if (selectedLevels.includes(level)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
+
+</script>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+body {
+        background-color: #5bb2a7; 
+        background-image: linear-gradient(180deg, #5bb2a7 0%, #5bb2a7 100%);
+        min-height: 100vh;
+        color: #5bb2a7;
+       
+    }
+/* Navbar */
+.navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+
+}
+
+.logo {
+        font-weight: bold;
+        color: #0d0c0c;
+        font-size: 20px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+.nav-links a{
+    text-decoration: none;
+        font-size: 15px;
+        color: #17181b;
+        font-weight: 500;
+        transition: 0.3s;
+
+}
+
+.nav-links a:hover{color: #5bb2a7;}
+.main-wrapper {
+        max-width: 1200px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        display: flex;
+    }
+/* Layout */
+.layout {
+     display: flex;
+        width: 100%;
+        gap: 30px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+        background: rgba(255, 255, 255, 0.918);
+        backdrop-filter: blur(12px);
+        padding: 25px;
+        border-radius: 15px;
+        border: 1px solid rgba(247, 245, 245, 0.925);
+        height:200;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+}
+
+.sidebar h3 {
+    margin: 20px 0 10px;
+        font-size: 16px;
+        color: #1a3c3c;
+        font-weight: bold;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+   margin: 8px 0;
+        color: #555;
+        font-size: 14px;
+        cursor: pointer;
+}
+
+.sidebar label {
+   display: block;
+        margin: 5px 0;
+        font-size: 14px;
+        color: #555;
+}
+
+.stars {
+    color: gold;
+}
+
+/* Courses */
+.courses {
+    flex: 1;
+    margin-left: 30px;
+}
+
+/* Search */
+.search {
+    width: 35%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+.card {
+     border: 1px solid #eee;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #fff;
+        transition: 0.3s;
+        text-align: center;
+        padding-bottom: 15px;
+}
+
+.card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-3px);
+}
+.card h4 {
+    margin-bottom: 5px;
+}
+
+.card p {
+    color: #777;
+        font-size: 13px;
+        margin-bottom: 15px;
+}
+.card img{
+    width: 100%;
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 10px;
+}
+.btn-enroll {
+    display: inline-block;
+        background: #63e2ba;
+        color: #000;
+        padding: 8px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 14px;
+}
+.footer {
+    background: #1a3c3c;
+    color: #cde8e8;
+    padding: 50px 40px 0;
+    margin-top: 60px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-brand h2 {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.footer-brand p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #a8d0d0;
+}
+
+.social-icons {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    font-size: 20px;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+}
+
+.footer-links h4,
+.footer-contact h4 {
+    color: #ffffff;
+    margin-bottom: 14px;
+    font-size: 15px;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #a8d0d0;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-links ul li a:hover {
+    color: #2ecc71;
+}
+
+.footer-contact p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #a8d0d0;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 18px 0;
+    font-size: 13px;
+    color: #7aadad;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">GLOBAL LEARNING</div>
+
+    <ul class="nav-links">
+       <li><a href="home.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
+</nav>
+
+<!-- Layout -->
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h3>Categories</h3>
+        <ul>
+            <li>Web Design</li>
+            <li>Coding</li>
+            <li>Digital Marketing</li>
+            <li>Analytics</li>
+        </ul>
+
+        <h3>Level</h3>
+        <label><input type="checkbox"> Beginner</label>
+        <label><input type="checkbox"> Intermediate</label>
+        <label><input type="checkbox"> Advanced</label>
+
+        <h3>Rating</h3>
+        <div class="stars">★★★★★</div>
+    </aside>
+
+    <!-- Courses -->
+    <section class="courses">
+
+        <input type="text" placeholder="Search" class="search"/>
+
+        <div class="cards">
+
+            <div class="card">
+                <div><img src="Networking.webp" alt="network course" width="250" height="130"/></div>
+                <h4>Networking</h4>
+                <p>by Dr/Alex Thompson</p>
+                <a href="networking details.html" class="btn-enroll">View Course </a>
+            </div>
+
+            <div class="card">
+                <div><img src="markiting.jpg" alt="Markiting course" width="250" height="130"/></div>
+                <h4>Digital Marketing</h4>
+                <p>by Dr/Sarah Lee</p>
+                <a href="Marketing details.html" class="btn-enroll">View Course </a>
+            </div>
+
+            <div class="card">
+               <div><img src="python.webp" alt="paython course" width="250" height="130"/></div>
+                <h4>Python for AI</h4>
+                <p>byDr/ joe Mursalli</p>
+                <a href="python for ai datails.html" class="btn-enroll">View Course </a>
+            </div>
+
+            <div class="card">
+                <div><img src="web design.webp" alt="web course" width="250" height="130"/></div>
+                <h4> Web Design</h4>
+                <p>by Dr/ Dora Alex</p>
+                <a href="web design details.html" class="btn-enroll">View Course </a>
+            </div>
+            <div class="card">
+               <div><img src="data structure.jpg" alt="data course" width="250" height="130"/></div>
+                <h4>Data Structure</h4>
+                <p>by Dr/Mark gerges</p>
+                <a href="DS datails.html" class="btn-enroll">View Course </a>
+            </div>
+            <div class="card">
+                 <div><img src="machine learning.jpg" alt="machine course" width="250" height="130"/></div>
+                <h4>machine learning</h4>
+                <p>by  Dr/Noah Lee</p>
+                <a href="machine learning details.html" class="btn-enroll">View Course </a>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+</html>
