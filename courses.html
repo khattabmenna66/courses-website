@@ -84,10 +84,10 @@ function filterCourses() {
     font-family: "Segoe UI", sans-serif;
 }
 body {
-        background-color: #5bb2a7; 
-        background-image: linear-gradient(180deg, #5bb2a7 0%, #5bb2a7 100%);
+        background-color: #a5eee5; 
+        background-image: linear-gradient(180deg, #dffaf6 0%, #c7e8e3 100%);
         min-height: 100vh;
-        color: #5bb2a7;
+        color: #defaf6;
        
     }
 /* Navbar */
@@ -220,6 +220,7 @@ body {
 }
 .card h4 {
     margin-bottom: 5px;
+    color: #217258;
 }
 
 .card p {
@@ -235,7 +236,7 @@ body {
 }
 .btn-enroll {
     display: inline-block;
-        background: #63e2ba;
+        background: #27e583;
         color: #000;
         padding: 8px 20px;
         border-radius: 6px;
@@ -341,8 +342,9 @@ body {
        <li><a href="home.html">Home</a></li>
         <li><a href="courses.html">Courses</a></li>
         <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="login.html">Login</a></li>
     </ul>
+
+    <a href="login.html" class="btn-enroll">Login</a>
 </nav>
 
 <!-- Layout -->
@@ -354,14 +356,14 @@ body {
         <ul>
             <li>Web Design</li>
             <li>Coding</li>
-            <li>Digital Marketing</li>
+            <li>Marketing</li>
             <li>Analytics</li>
         </ul>
 
-        <h3>Level</h3>
-        <label><input type="checkbox"> Beginner</label>
-        <label><input type="checkbox"> Intermediate</label>
-        <label><input type="checkbox"> Advanced</label>
+       <h3>Level</h3>
+        <label><input type="checkbox" value="Beginner"> Beginner</label>
+<label><input type="checkbox" value="Intermediate"> Intermediate</label>
+<label><input type="checkbox" value="Advanced"> Advanced</label>
 
         <h3>Rating</h3>
         <div class="stars">★★★★★</div>
@@ -372,53 +374,102 @@ body {
 
         <input type="text" placeholder="Search" class="search"/>
 
-        <div class="cards">
+<div class="cards">
 
-            <div class="card">
-                <div><img src="Networking.webp" alt="network course" width="250" height="130"/></div>
-                <h4>Networking</h4>
-                <p>by Dr/Alex Thompson</p>
-                <a href="networking details.html" class="btn-enroll">View Course </a>
-            </div>
+    <div class="card" id="card-1" data-level="Beginner">
+        <div><img src="Networking.webp" alt="network course" width="100%" height="130"/></div>
+        <h4>Networking</h4>
+        <p>by Dr/ Alex Thompson</p>
+        <a href="networking details.html" class="btn-enroll">View Course </a>
+    </div>
 
-            <div class="card">
-                <div><img src="markiting.jpg" alt="Markiting course" width="250" height="130"/></div>
-                <h4>Digital Marketing</h4>
-                <p>by Dr/Sarah Lee</p>
-                <a href="Marketing details.html" class="btn-enroll">View Course </a>
-            </div>
+    <div class="card" id="card-2" data-level="Intermediate">
+        <div><img src="markiting.jpg" alt="Markiting course" width="100%" height="130"/></div>
+        <h4>Marketing</h4>
+        <p>by Dr/ Sarah Lee</p>
+        <a href="Marketing details.html" class="btn-enroll">View Course </a>
+    </div>
 
-            <div class="card">
-               <div><img src="python.webp" alt="paython course" width="250" height="130"/></div>
-                <h4>Python for AI</h4>
-                <p>byDr/ joe Mursalli</p>
-                <a href="python for ai datails.html" class="btn-enroll">View Course </a>
-            </div>
+    <div class="card" id="card-3" data-level="Beginner">
+        <div><img src="python.webp" alt="python course" width="100%" height="130"/></div>
+        <h4>Python for AI</h4>
+        <p>by Dr/ Joe Mursalli</p>
+        <a href="python for ai datails.html" class="btn-enroll">View Course </a>
+    </div>
 
-            <div class="card">
-                <div><img src="web design.webp" alt="web course" width="250" height="130"/></div>
-                <h4> Web Design</h4>
-                <p>by Dr/ Dora Alex</p>
-                <a href="web design details.html" class="btn-enroll">View Course </a>
-            </div>
-            <div class="card">
-               <div><img src="data structure.jpg" alt="data course" width="250" height="130"/></div>
-                <h4>Data Structure</h4>
-                <p>by Dr/Mark gerges</p>
-                <a href="DS datails.html" class="btn-enroll">View Course </a>
-            </div>
-            <div class="card">
-                 <div><img src="machine learning.jpg" alt="machine course" width="250" height="130"/></div>
-                <h4>machine learning</h4>
-                <p>by  Dr/Noah Lee</p>
-                <a href="machine learning details.html" class="btn-enroll">View Course </a>
-            </div>
+    <div class="card" id="card-4" data-level="Intermediate">
+        <div><img src="web design.webp" alt="web course" width="100%" height="130"/></div>
+        <h4>Web Design</h4>
+        <p>by Dr/ Dora Alex</p>
+        <a href="web design details.html" class="btn-enroll">View Course </a>
+    </div>
+
+    <div class="card" id="card-5" data-level="Advanced" > 
+        <div><img src="data structure.jpg" alt="data course" width="100%" height="130"/></div>
+        <h4>Data Structure</h4>
+        <p>by Dr/ Mark Gerges</p>
+        <a href="DS datails.html" class="btn-enroll">View Course </a>
+    </div>
+
+    <div class="card" id="card-6" data-level="Advanced" >
+        <div><img src="machine learning.jpg" alt="machine course" width="100%" height="130"/></div>
+        <h4>Machine Learning</h4>
+        <p>by Dr/ Noah Lee</p>
+        <a href="machine learning details.html" class="btn-enroll">View Course </a>
+    </div>
+
+</div>
+
+            
+            
 
         </div>
 
     </section>
 
 </div>
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-brand">
+            <h2>GLOBAL LEARNING</h2>
+            <p>Empowering minds through quality online education. Learn anytime, anywhere.</p>
+         
+        </div>
+
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h4>Categories</h4>
+            <ul>
+                <li><a href="#">Web Design</a></li>
+                <li><a href="#">Coding</a></li>
+                <li><a href="#">Marketing</a></li>
+                <li><a href="#">Analytics</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <p>📧 support@globallearning.com</p>
+            <p>📞 +1 (800) 123-4567</p>
+            <p>📍 New York, USA</p>
+            <p>🕐 Mon - Fri: 9:00 AM – 6:00 PM</p>
+        </div>
+
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Global Learning. All rights reserved.</p>
+    </div>
+</footer><script src="./js/main.js"></script>
 
 </body>
 </html>
